@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const { fontFamily } = require('tailwindcss/defaultTheme')
+
 module.exports = {
  
   content: [
@@ -12,6 +14,9 @@ module.exports = {
         'green-base': '#128D02',
         'orange-medium': '#F29305',
         'silver': '#979797',
+      },
+      fontFamily: {
+        sans: ['var(--font-figtree)', ...fontFamily.sans],
       },
     },
   },
