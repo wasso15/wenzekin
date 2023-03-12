@@ -17,12 +17,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-       <NavBar/>
+     
        <main className=' border h-[600px]'>
           body
        </main>
-       <Footer/>
-
+     
 
         
       </main>
