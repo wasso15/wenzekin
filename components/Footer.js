@@ -5,13 +5,13 @@ import Image from 'next/image'
 
 function Footer() {
   return (
-    <footer className=' md:h-[300px] bg-green-base flex flex-col items-center justify-center'>
+    <footer className=' sticky top-[100vh] w-[100%] md:h-[300px] bg-green-base flex flex-col items-center justify-center'>
         <div className=' h-[80%] w-[100%] mx-auto flex flex-col-reverse lg:flex-row items-center justify-evenly '>
             
             <div className='md:w-[300px] md:h-[200px]  flex flex-col items-center justify-center my-4 md:my-0 '>
                 <div className=' flex flex-row items-center'>
                     <a href='#'  className="w-[40px] h-[35px]  md:h-[50px] md:w-[60px] relative "> 
-                       <Image src={ImagesAssets.logoWenzeKin} fill={true}  object-fit= "contain"  alt='Logo wenzeKin'/>
+                       <Image src={ImagesAssets.logoWenzeKin}  fill={true}  object-fit= "contain"  alt='Logo wenzeKin'/>
                     </a> 
                 </div>
                 
