@@ -4,6 +4,7 @@ import { ImagesAssets } from '@/public/images/imageAssets'
 import { FiUser } from 'react-icons/fi';
 import { CgShoppingCart } from 'react-icons/cg';
 import { MdSearch } from 'react-icons/md';
+import Link from 'next/link';
 
 
 function NavBar() {
@@ -15,9 +16,9 @@ function NavBar() {
             <div className=' w-[70%] lg:w-[650px] flex-row flex justify-between  items-center'>
 
                 <div className=' flex flex-row items-center'>
-                    <a href='#'  className="w-[40px] h-[35px]  md:h-[50px] md:w-[60px] relative "> 
+                    <Link href='/'  className="w-[40px] h-[35px]  md:h-[50px] md:w-[60px] relative "> 
                        <Image src={ImagesAssets.logoWenzeKin} fill={true}  object-fit= "contain" alt='Logo wenzeKin'/>
-                    </a> 
+                    </Link> 
                 </div>
                 
                 <div className='bg-white/25 h-[40px]  ml-4 md:ml-2 md:h-[41px] w-[380px] rounded-md flex flex-row items-center'>

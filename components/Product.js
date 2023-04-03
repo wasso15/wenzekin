@@ -1,12 +1,15 @@
 import React from "react";
 import { urlFor } from "@/lib/client";
+import Link from "next/link";
 
 function Product({ data }) {
-  console.log("data product", data);
-  const { image, Nom,prix } = data;
+  // console.log("data product", data);
+
+  const { image, Nom,prix,slug,_id } = data;
+  console.log(slug)
   const productImg = urlFor(image).url();
   return (
-    <div className="max-w-sm overflow-hidden  shadow-lg h-[290px] transform transition duration-200 hover:scale-105 hover:rotate cursor-pointer " >
+    <Link key={_id} href={`/product/${slug.current}`} className="max-w-sm overflow-hidden  shadow-lg h-[290px] transform transition duration-200 hover:scale-105 hover:rotate" >
       <img
         className="w-full h-[180px] rounded-t-xl object-cover"
         src={productImg}
@@ -43,7 +46,7 @@ function Product({ data }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
