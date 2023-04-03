@@ -4,9 +4,7 @@ import { ImagesAssets } from '@/public/images/imageAssets'
 import { FiUser } from 'react-icons/fi';
 import { CgShoppingCart } from 'react-icons/cg';
 import { MdSearch } from 'react-icons/md';
-const sanityIoImageLoader = ({ src, width, quality }) => {
-    return `https://cdn.sanity.io/${src}?w=${width}&q=${quality || 75}`
-  }
+
 
 function NavBar() {
   return (
