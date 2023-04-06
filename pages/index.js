@@ -9,6 +9,7 @@ import Title from "@/components/Title";
 import Product from "@/components/Product";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import HowItWorks from "@/components/HowItWorks";
+import SliderCards from "@/components/SliderCards";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,22 +28,9 @@ export default function Home({ productData, bannerData }) {
       </header>
       <main className="">
         <div className=" flex flex-row items-center w-[90%] my-10 mx-auto">
-          <div className=" h-8 w-8 rounded  bg-green-base hover:bg-green-base/90 flex flex-row items-center justify-center">
-            <MdArrowBackIosNew className=" text-white text-base" />
-          </div>
-          <div className=" w-[90%]  mx-auto py-5">
-            <Title> Le plus populaire</Title>
-            <div className=" flex flex-row items-center space-x-5 mt-10">
-              <div className="m-auto  grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
-                {productData.map((item) => (
-                  <Product data={item} key={item._id} />
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className=" h-8 w-8 rounded  bg-green-base hover:bg-green-base/90 flex flex-row items-center justify-center">
-            <MdArrowForwardIos className=" text-white text-base" />
-          </div>
+          
+          <SliderCards productData={productData}>Le plus populaire</SliderCards>
+          
         </div>
 
         <div className=" w-[80%]  mx-auto py-5">

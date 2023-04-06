@@ -1,6 +1,16 @@
+import { addToBasket } from "@/redux/features/BaskeSlice";
 import React from "react";
+import { useDispatch } from "react-redux";
 
-const InputNumeric = () => {
+
+
+const InputNumeric = ({data}) => {
+ const dispatch= useDispatch();
+
+ const addProduct=()=>{
+    dispatch(addToBasket(data))
+ }
+ 
   return (
     <div className="h-[85px] w-full shadow-md bg-white rounded-lg  flex flex-row justify-around items-center">
       <div className="">
@@ -19,7 +29,7 @@ const InputNumeric = () => {
         </div>
       </div>
       <div></div>
-      <div className=" border h-[35px] w-[100px] bg-green-base rounded hover:bg-green-base/90  cursor-pointer  flex flex-row items-center justify-center">
+      <div onClick={addProduct} className=" border h-[35px] w-[100px] bg-green-base rounded hover:bg-green-base/90  cursor-pointer  flex flex-row items-center justify-center">
         <p className=" text-xs font-bold text-white">Ajouter</p>
       </div>
     </div>

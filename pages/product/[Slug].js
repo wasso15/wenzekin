@@ -1,15 +1,18 @@
 import InputNumeric from "@/components/InputNumeric";
+import SliderCards from "@/components/SliderCards";
 import { SlugQuery, productDetails, productQuery } from "@/lib/Query";
 import client, { urlFor } from "@/lib/client";
 import React from "react";
 
-const ProductDetails = ({ productData }) => {
+const ProductDetails = ({ productData, products }) => {
   const { image, Nom, prix, slug, _id,description } = productData;
-
+    console.log(products)
   const productImg = urlFor(image).url();
   return (
-    <>
-    <div className=" w-[80%]  mt-[100px] mx-auto h-[600px] flex flex-row gap-x-6 ">
+    <div className=" flex flex-col gap-[80px]" >
+
+
+    <div className=" w-[80%] items-center justify-center   mx-auto  flex flex-row gap-x-6 ">
       <div className=" w-[45%]   ">
         <img
           className="w-full h-[450px] rounded-xl object-cover object-center"
@@ -42,19 +45,22 @@ const ProductDetails = ({ productData }) => {
           <div className=" flex flex-row justify-between mt-1">
             <p className=" text-orange-medium  text-xs">En stock </p>
           </div>
-          <div className=" flex flex-row justify-between mt-10">
+          <div className=" flex flex-row justify-between mt-10  h-[200px]">
             <p className=" text-silver text-justify text-sm">{description}</p>
           </div>
 
-          <div className=" flex flex-row justify-between mt-10 ">
-            <InputNumeric/>
+          <div className=" flex flex-row justify-between mt-[30px] ">
+            <InputNumeric data={productData}/>
           </div>
         </div>
       </div>
       
     </div>
+    <div className=" w-[80%] mx-auto mb-[100px]" >
+      <SliderCards productData={products}>Produits  Similaires</SliderCards>
+    </div>
 
-    </>
+    </div>
 
   );
 };
@@ -75,9 +81,10 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params: { Slug } }) => {
   const productData = await client.fetch(productDetails(Slug));
+  const products = await client.fetch(productQuery);
 
   return {
-    props: { productData },
+    props: { productData, products},
   };
 };
 export default ProductDetails;
