@@ -1,11 +1,9 @@
 import React from "react";
 import { urlFor } from "@/lib/client";
 import Link from "next/link";
-import toast, { Toaster } from 'react-hot-toast';
 
 function Product({ data }) {
   // console.log("data product", data);
-  const notify = () => toast('Here is your toast.')
   const { image, Nom,prix,slug,_id } = data;
   console.log(slug)
   const productImg = urlFor(image).url();
@@ -41,8 +39,8 @@ function Product({ data }) {
           <div className="mt-3 flex flex-row items-center justify-between"> 
             <p className=" text-xs font-bold text-orange-medium">{prix}Fc/Kg</p>
 
-            <div onClick={notify} className=" h-[35px] w-[100px] bg-green-base rounded hover:bg-green-base/90  cursor-pointer  flex flex-row items-center justify-center">
-                <p className=" text-xs font-bold text-white">Ajouter</p>
+            <div  className=" h-[35px] w-[100px] bg-green-base rounded hover:bg-green-base/90  cursor-pointer  flex flex-row items-center justify-center">
+                <p className=" text-xs font-bold text-white">Voir</p>
             </div>
           </div>
         </div>

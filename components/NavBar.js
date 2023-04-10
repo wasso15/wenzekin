@@ -27,7 +27,7 @@ function NavBar() {
                 
                 <div className='bg-white/25 h-[40px]  ml-4 md:ml-2 md:h-[36px] w-[340px] rounded-md flex flex-row items-center'>
 
-                    <input className=" w-[85%] h-full bg-transparent text-white text-[10px] md:text-[14px] placeholder-white ml-4 focus:outline-none  " type="text" placeholder="Recherche"/>
+                    <input className=" w-[85%] h-full bg-transparent text-white text-[10px] md:text-[12px] placeholder-white ml-4 focus:outline-none  " type="text" placeholder="Recherche"/>
                     <MdSearch color='white' size={26}/>
 
                 </div>

@@ -3,13 +3,16 @@ import SliderCards from "@/components/SliderCards";
 import { SlugQuery, productDetails, productQuery } from "@/lib/Query";
 import client, { urlFor } from "@/lib/client";
 import React from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 const ProductDetails = ({ productData, products }) => {
+  const notify = () => toast.success('Here is your toast.');
+
   const { image, Nom, prix, slug, _id,description } = productData;
     console.log(products)
   const productImg = urlFor(image).url();
   return (
-    <div className=" flex flex-col gap-[80px]" >
+    <div className=" flex flex-col gap-[60px]" >
 
 
     <div className=" w-[80%] items-center justify-center   mx-auto  flex flex-row gap-x-6 ">
@@ -50,8 +53,9 @@ const ProductDetails = ({ productData, products }) => {
           </div>
 
           <div className=" flex flex-row justify-between mt-[30px] ">
-            <InputNumeric data={productData}/>
+            <InputNumeric notify={notify} data={productData}/>
           </div>
+
         </div>
       </div>
       
@@ -59,7 +63,6 @@ const ProductDetails = ({ productData, products }) => {
     <div className=" w-[80%] mx-auto mb-[100px]" >
       <SliderCards productData={products}>Produits  Similaires</SliderCards>
     </div>
-
     </div>
 
   );
