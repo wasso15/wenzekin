@@ -33,7 +33,7 @@ function NavBar() {
                 </div>
 
                       
-                <Link href='/category'  className='flex flex-row items-center'>
+                <Link href='/category'  className=' md:px-4 flex flex-row items-center border-b-[3px] border-transparent hover:border-b-[3px] hover:border-orange-medium h-[52px]'>
                     <div className='text-white text-[12px] hidden lg:block'> Categorie</div>
                     <div className='ml-3 md:mx-2 h-[20px] w-[20px]  md:h-[21px]  md:w-[21px] relative'>
                         <Image src={ImagesAssets.categoryIcon} fill={true} object-fit= "contain"  alt='Logo wenzeKin'/>
@@ -46,14 +46,14 @@ function NavBar() {
             <div className=' w-[20%] lg:w-[250px] flex-row flex justify-between lg:justify-around items-center'>
 
                       
-                <Link href='/auth/login' className='flex flex-row items-center '>
+                <Link href='/auth/login' className='flex flex-row items-center border-b-[3px] border-transparent hover:border-b-[3px] hover:border-orange-medium h-[52px] px-4 '>
                     
                         <FiUser color='white' className=' text-[22px] md:text-[26x] ' />
                     <div className='text-white ml-2 text-[12px] hidden md:block'> Login </div>
 
                 </Link>
 
-               <Link href='/checkout'  className=' lg:w-[120px] flex flex-row items-center justify-center '>
+               <Link href='/checkout'  className=' lg:w-[120px] flex flex-row items-center justify-center border-b-[3px] border-transparent hover:border-b-[3px] hover:border-orange-medium h-[52px] '>
                <div className='flex flex-row  relative h-7 items-center '>                  
                     
                     <CgShoppingCart color='white' className="text-[24px] md:text-[24px]"/>
