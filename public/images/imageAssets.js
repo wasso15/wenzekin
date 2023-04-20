@@ -8,7 +8,8 @@ export const ImagesAssets = {
     click:require('./click.png'),
     package:require('./package-box-opened-tool.png'),
     truck:require('./small-truck.png'),
-
-
-
+    Mpesa:require('./M-pesa.png'),
+    MyAirtel:require('./my-airtel.jpg'),
+    OrageM:require('./Orange-money.jpeg'),
+    Visa:require('./visa.png'),
 }

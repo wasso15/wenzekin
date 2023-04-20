@@ -7,7 +7,6 @@ import client from "@/lib/client";
 import BannerHero from "@/components/BannerHero";
 import Title from "@/components/Title";
 import Product from "@/components/Product";
-import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import HowItWorks from "@/components/HowItWorks";
 import SliderCards from "@/components/SliderCards";
 

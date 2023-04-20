@@ -5,26 +5,33 @@ import {
   selectBasketItems,
   selectBasketTotal,
 } from "@/redux/features/BaskeSlice";
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { CgShoppingCart } from "react-icons/cg";
-import { TbTruckDelivery ,TbMoneybag} from "react-icons/tb";
+import { TbTruckDelivery, TbMoneybag } from "react-icons/tb";
 import { BsShop } from "react-icons/bs";
+import { useRouter } from 'next/router';
 
 import { useSelector } from "react-redux";
 import Accordion from "@/components/Accordion";
-import Title from "@/components/Title";
-import CreditCard from "@/components/CreditCard";
-// import { useForm, Controller } from "react-hook-form";
+import Deliver from "@/components/Deliver";
+import AccordionTitle from "@/components/AccordionTitle";
+import Coordonate from "@/components/Coordonate";
+import Payement from "@/components/Payement";
+import { ImagesAssets } from "@/public/images/imageAssets";
+import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+
 const index = () => {
   const items = useSelector((state) => selectBasketItems(state));
   const totalCart = useSelector((state) => selectBasketTotal(state));
   const basketCount = useSelector(selectBasketItems);
+  const DELIVER_PRICE=5500
 
-  console.log("total", totalCart, "Items", items);
   const uniqueIds = new Set();
   const uniqueItem = items.filter((element) => {
-    const isDuplicate = uniqueIds.has(element._id);
+  const isDuplicate = uniqueIds.has(element._id);
+
 
     uniqueIds.add(element._id);
 
@@ -35,39 +42,193 @@ const index = () => {
     return false;
   });
 
+  const setProvider=(index)=>{
+    if(index===1){
+        return "MPESA"
+    }
+
+    else if(index===2)
+    {
+        return "AIRTEL"
+    }
+
+    else if(index===3)
+    {
+        return "ORANGE"
+    }
+
+}
+
   // const { control, handleSubmit,setError, formState: { errors }, trigger} = useForm({
   //   defaultValues: {
   //     number: ''}
   // });
 
-  const onSubmit = (data) => {};
+  const { control, handleSubmit } = useForm({
+  });
+  const [DeliverChoice, setDeliverChoice]= useState(true); 
+  const payData = [
+    {
+      id: 0,
+      img: ImagesAssets.Visa,
+      title: "Carte de crédit",
+    },
+    {
+      id: 1,
+      img: ImagesAssets.Mpesa,
+      title: "Mpesa",
+    },
+    {
+      id: 2,
+      img: ImagesAssets.MyAirtel,
+      title: "Airtel Money",
+    },
 
+    {
+      id: 3,
+      img: ImagesAssets.OrageM,
+      title: "Orange Money",
+    },
+  ];
+  const [ActiveItem, setActiveItem] = useState(payData[0]);
+  const router = useRouter();
+
+
+  const onSubmit = data =>{
+   
+
+    if(ActiveItem.id===0){
+      console.log('mode de payement Non disponible')
+      toast.error("Moyen de payement no disponible veuillez utiliser le mobile money")
+    }
+    else {
+        const {MobileMoneyNum,Name,PhoneNumber }= data
+      // console.log(data, DeliverChoice,ActiveItem.id)
+        const totalPay= totalCart+DELIVER_PRICE; 
+        console.log(setProvider(ActiveItem.id))
+
+        let providerData=
+        {
+            "gatewayMode": 1, // required, 0 : SandBox 1 : Live
+            "publicApiKey": "MP-SBPK-2vXTyeF2$KHn/X$D$E40Tn8qI3eUOR11UYjI.0ez2mRMzQDetQt9uD$qRQ2aRwmG9iy3$ybbLid8Ekau5ZE.nbUT.Q$fa2Rb/NF0duSWDNfdomb9O9yKNfBc", // required,
+            "secretApiKey" : "MP-SBPK-YCi16Efa2RcU7vk4pyr5f8J$WO/eL$GTEXnTYnIs$mC740osEzyBqiZhrLJaUxlf0o2phXK$0/oM1GCy3CNsyY$yrFqdkuPen4r1luwffOYRL$j/n7yMqhvd", // required
+            "transactionReference": "WenzeKin", // required
+            "amount":(totalPay).toFixed(3), // required
+            "currency" : "CDF", // required USD, CDF, FCFA, EURO
+            "customerFullName": Name, // nullable
+            "customerPhoneNumber" : PhoneNumber, // nullable
+            "customerEmailAddress" : null,
+            "chanel":"MOBILEMONEY", // required MOBILEMONEY
+            "provider": setProvider(ActiveItem.id), // required MPESA, ORANGE, AITEL, AFRICEL, MTN
+            "walletID" :MobileMoneyNum // required
+        }
+
+        let options = {
+          method: 'POST',
+          headers: {
+              'Content-Type': 
+                  'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(providerData)
+      }
+
+      const confirmSell=()=>{
+        // setLoader(true); 
+        fetch('https://marchand.maishapay.online/api/payment/rest/vers1.0/merchant',options )
+        .then(response => response.json())
+        .then(data => 
+            {
+            setLoader(false)
+            console.log(data)
+            if(data.status===200)
+            {
+                // navigation.navigate('DoneScreen', {ref:genId}); 
+                
+            } 
+            
+            else{
+                
+            // navigation.navigate('ErrorScreen')
+             
+            const orders = {
+            _type: 'orders',
+            // _id: genId,
+            // user_id: {
+            //     _type: 'reference',
+            //     _ref: dataUser[0]._id
+            //   }, 
+          
+              products:
+                uniqueItem.map((item, index)=>({
+                    _key:`${index}`,
+                    product:item.Nom,
+                    quantity:tab[index]
+                    } ))
+          }
+        
+        client.create(orders).then((res) => 
+            {                  
+                // navigation.navigate('DoneScreen');   
+            })
+
+          .catch((errors)=>{
+            console.log('Error sanity')
+            console.log(errors)
+            navigation.navigate('ErrorScreen')
+
+          })  
+          }
+        })
+
+        .catch(error => {
+            console.log('Error Maisha pay ')
+            // toast.error("Transaction Echoue veuillez Reessayer ")
+            router.replace('/purchase')
+            // navigation.navigate('ErrorScreen')
+        });
+    }
+    confirmSell()
+
+
+    }
+
+  } 
+    
   const accordionData = [
     {
-      title: 'Section 1',
-      content: <CreditCard/>
+      title: <AccordionTitle icon={AiOutlineUser}>Coordonnées</AccordionTitle>,
+      content: <Coordonate Controller={Controller} control={control} />,
     },
     {
-      title: 'Section 2',
-      content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia veniam
-      reprehenderit nam assumenda voluptatem ut. Ipsum eius dicta, officiis
-      quaerat iure quos dolorum accusantium ducimus in illum vero commodi
-      pariatur? Impedit autem esse nostrum quasi, fugiat a aut error cumque
-      quidem maiores doloremque est numquam praesentium eos voluptatem amet!
-      Repudiandae, mollitia d reprehenderit a ab odit!`
+      title: <AccordionTitle icon={TbTruckDelivery}>Livraison</AccordionTitle>,
+      content: <Deliver Controller={Controller} control={control}  setChoice={setDeliverChoice} deliverChoice={DeliverChoice}  />,
     },
     {
-      title: 'Section 3',
-      content: `Sapiente expedita hic obcaecati, laboriosam similique omnis architecto ducimus magnam accusantium corrupti
-      quam sint dolore pariatur perspiciatis, necessitatibus rem vel dignissimos
-      dolor ut sequi minus iste? Quas?`
-    }
+      title: <AccordionTitle icon={TbMoneybag}>Payement</AccordionTitle>,
+      content: <Payement Controller={Controller} control={control}  ActiveItem={ActiveItem} setActiveItem={setActiveItem} Paydata={payData} />,
+    },
   ];
 
+  // let providerData=
+  //       {
+  //           "gatewayMode": 1, // required, 0 : SandBox 1 : Live
+  //           "publicApiKey": "MP-LIVEPK-OsUB2g$.SSqDnhfNvx5y9Ik.f$7N0RRdpy6Ra1ihlj$hKPzJLOcZ$41qgIT..$035NvSsKR2jgxy5EZySp4klpCckKxU1tsWOyreC9X0014DhvY9f$v915ur", // required,
+  //           "secretApiKey" : "MP-LIVEPK-H71B$/5$jpNag214yDe2v0tEOoxj0rxKVTGySSv8Y8nu8/17jUFQ$mjcWySyeon1r5yexak9miApaRliLZe2.ku$Cn02$$D0GDyXy2Rqsv9uxP0.S2ywYWa.", // required
+  //           "transactionReference": "", // required
+  //           "amount":(totalCart).toFixed(3), // required
+  //           "currency" : "CDF", // required USD, CDF, FCFA, EURO
+  //           "customerFullName": dataUser.name, // nullable
+  //           "customerPhoneNumber" : route.params.number, // nullable
+  //           "customerEmailAddress" : null,
+  //           "chanel":"MOBILEMONEY", // required MOBILEMONEY
+  //           "provider": setProvider(providerIndex), // required MPESA, ORANGE, AITEL, AFRICEL, MTN
+  //           "walletID" :route.params.number // required
+  //       }
+
   return (
-    <div className=" w-[80%] mx-auto flex flex-row gap-[40px] mb-[100px] ">
-      <div className=" w-1/2   ">
-        <div className=" w-[90%] mx-auto">
+    <div className="w-[95%] md:w-[80%] mx-auto flex flex-col md:flex-row md:gap-[40px] mb-[100px] ">
+      <div className=" w-full md:w-1/2  ">
+        <div className=" w-[95%] md:w-[90%] mx-auto">
           <div className="w-full border-b-[3px] mx-auto py-3 border-orange-medium flex flex-row items-center space-x-3">
             <CgShoppingCart
               color="#F29305"
@@ -96,124 +257,22 @@ const index = () => {
           </div>
         </div>
       </div>
+      <div className="w-full md:w-1/2 ">
+        <div className="  w-full">
+          <form className="" onSubmit={handleSubmit(onSubmit)}>
+            <div className="">
+              {accordionData.map(({ title, content }) => (
+                <Accordion key={title} title={title} content={content} />
+              ))}
+            </div>
 
-      <div className="border w-1/2 ">
-        <div className="border w-full">
-          <div className="w-full border-b-[3px] mx-auto py-3 border-orange-medium flex flex-row items-center space-x-3">
-            <AiOutlineUser
-              color="#F29305"
-              className="text-[24px] md:text-[20px]"
-            />
-            <p className=" text-sm text-gray-500 font-semibold">Coordonnées</p>
-          </div>
-          <div>
-            <form className="mt-5">
-              <div className=" flex flex-col gap-6 border">
-                <input
-                  class="appearance-none border text-xs border-orange-medium rounded-md w-full  px-2 text-gray-500 leading-tight focus:outline-none focus:bg-white focus:border-orange-medium h-[42px]"
-                  type="text"
-                  placeholder="Nom"
-                />
-
-                <input
-                  class="appearance-none border text-xs border-orange-medium rounded-md w-full  px-2 text-gray-500 leading-tight focus:outline-none focus:bg-white focus:border-orange-medium h-[42px]"
-                  type="tel"
-                  placeholder="Telephone"
-                />
-              </div>
-              <div className="mt-[20px]">
-                <div className="w-full border-b-[3px] mx-auto py-3 border-orange-medium flex flex-row items-center space-x-3 ">
-                  <TbTruckDelivery
-                    color="#F29305"
-                    className="text-[24px] md:text-[20px]"
-                  />
-                  <p className=" text-sm text-gray-500 font-semibold">
-                    Livraison
-                  </p>
-                </div>
-
-                <div className=" w-[95%] border-4 mx-auto border-green-base flex flex-row gap-20 mt-5 ">
-                  <div className="border h-[70px] bg-orange-medium w-full rounded-md flex flex-row items-center justify-center space-x-2">
-                    <TbTruckDelivery className="text-[24px] text-white md:text-[20px]" />
-                    <p className=" text-sm text-white font-semibold">
-                      Livraison
-                    </p>
-                  </div>
-
-                  <div className="border h-[70px] bg-orange-medium w-full rounded-md flex flex-row items-center justify-center space-x-2 ">
-                    <BsShop className="text-[24px] text-white md:text-[20px]" />
-                    <p className=" text-sm text-white font-semibold">
-                      Collecte
-                    </p>
-                  </div>
-                </div>
-                <div className=" flex flex-row gap-6 border w-[95%] mx-auto mt-5">
-                  <input
-                    class="appearance-none border text-xs border-orange-medium rounded-md w-full  px-2 text-gray-500 leading-tight focus:outline-none focus:bg-white focus:border-orange-medium h-[42px]"
-                    type="text"
-                    placeholder="Adresse complet & reference"
-                  />
-                </div>
-              </div>
-
-              <div className="mt-[20px]">
-                <div className="w-full border-b-[3px] mx-auto py-3 border-orange-medium flex flex-row items-center space-x-3 ">
-                  <TbMoneybag
-                    color="#F29305"
-                    className="text-[24px] md:text-[20px]"
-                  />
-                  <p className=" text-sm text-gray-500 font-semibold">
-                    Payement
-                  </p>
-                </div>
-
-                <div className=" border border-green-base">
-                  {
-                    accordionData.map(({ title, content }) => (
-                    <Accordion title={title} content={content}/>))
-
-                  }
-                </div>
-              </div>
-            </form>
-
-            {/* <View className="w-[90%] mx-auto">
-                <View 
-                    className={ `flex-row justify-between mt-2 items-center h-[50px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded 
-                    ${errors.marchandName ? "focus:ring-[#E84E1B] border-[#E84E1B]  focus:border-[#E84E1B]":"focus:ring-blue-500 focus:border-blue-500"  }`}>
-                    <View className="  pl-2 pr-2 ">
-                         <Entypo name="shop" size={24} color="black" />            
-                    </View> 
-
-                    <Controller control={control} rules={{
-                        required: "Nom de l'entreprise requise",
-                        minLength: {
-                          value: 2,
-                          message: " 3 Caracteres requis au minimun ",
-                        },
-                    }}
-                        name="marchandName"
-                        render={({ field: { onChange, onBlur, value, } }) => (
-                        <TextInput
-                            className=" text-gray-500 font-semibold w-[90%] h-full  "
-                            onBlur={onBlur}
-                            onChangeText={(text)=>{onChange(text); trigger('marchandName')}}
-                            value={value}
-                            placeholder=" Nom de l'entreprise"
-                            keyboardType='default'
-                            />)}
-                            
-                    />
-                   
-                </View>  
-                <View className="h-5 ">
-                     {errors.marchandName && <Text className=" text-xs text-[#E84E1B]"> {errors.marchandName.message}</Text>}
-                </View>
-            </View> */}
-            <div className=" border w-[90%] mx-auto"></div>
-          </div>
+            <div className=" w-[95%] mx-auto">
+              <button  type="submit" className={`h-[45px] w-full bg-green-base cursor-pointer hover:bg-green-base/90  rounded     flex flex-row items-center justify-center`}>
+                <p className=" text-xs font-bold text-white">Payer {totalCart}</p>
+              </button>
+            </div>
+          </form>
         </div>
-        {/* <Payement/> */}
       </div>
     </div>
   );
