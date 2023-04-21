@@ -89,7 +89,7 @@ export default function Home({ productData }) {
     } else {
       didMount.current = true;
     }
-  }, [checkedList]);
+  }, []);
 
   // console.log("Category", productData);
   return (

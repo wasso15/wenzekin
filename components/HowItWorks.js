@@ -24,7 +24,7 @@ function HowItWorks() {
           <p className=" text-white font-bold text-center lg:text-left mb-6"> Comment ça marche</p>
           <div className=" flex flex-col lg:flex-row justify-between h-[60%] items-center space-y-8 lg:space-y-0 mt-2">
             {data.map((item) => (
-              <div className=" w-[300px] px-4 lg:px-0 space-x-4 flex flex-col lg:flex-row items-center ">
+              <div key={item.text} className=" w-[300px] px-4 lg:px-0 space-x-4 flex flex-col lg:flex-row items-center ">
                 <div className="w-[55px] h-[55px]  relative ">
                   <Image
                     src={item.image}
