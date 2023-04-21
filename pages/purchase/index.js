@@ -15,12 +15,12 @@ const index = () => {
 
             </div>
             <div>
-                <p className=' text-center text-green-base'>Pour plus d'information contactez nous au 0811907343</p>
+                <p className=' text-center text-green-base'>{"Pour plus d'information contactez nous au 0811907343`"}</p>
             </div>
 
             <Link href={"/"} className=" w-full mt-8">
               <button  type="submit" className={`h-[45px] w-full bg-green-base cursor-pointer hover:bg-green-base/90  rounded     flex flex-row items-center justify-center`}>
-                <p className=" text-xs font-bold text-white">Retournez a l'accueil</p>
+                <p className=" text-xs font-bold text-white">{"Retournez a l'accueil"}</p>
               </button>
             </Link>
 

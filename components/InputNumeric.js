@@ -17,8 +17,6 @@ const InputNumeric = ({data}) => {
  const { image, Nom, prix, slug, _id,description } = data;
  const productImg = urlFor(image).url();
 
-
-console.log('input Numerique',data)
  const addProduct=()=>{
     dispatch(addToBasket(data));
     toast.custom((t) => (

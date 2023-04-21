@@ -9,7 +9,6 @@ const ProductDetails = ({ productData, products }) => {
   const notify = () => toast.success("Here is your toast.");
 
   const { image, Nom, prix, slug, _id, description } = productData;
-  console.log(products);
   const productImg = urlFor(image).url();
   return (
     <div className=" flex flex-col gap-[60px]">
