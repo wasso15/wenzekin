@@ -22,7 +22,7 @@ import { ImagesAssets } from "@/public/images/imageAssets";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
-const Index = () => {
+const index = () => {
   const items = useSelector((state) => selectBasketItems(state));
   const totalCart = useSelector((state) => selectBasketTotal(state));
   const basketCount = useSelector(selectBasketItems);
