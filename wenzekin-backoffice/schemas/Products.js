@@ -46,13 +46,13 @@ export default defineType({
       }),
       
 
-    //   defineField({
-    //     name: 'categories',
-    //     title: 'Categories',
-    //     type: 'array',
-    //     of: [{type: 'reference', to: {type: 'product_category'}}],
-    //     validation: Rule => Rule.required()
-    //   }),
+      defineField({
+        name: 'categories',
+        title: 'Categories',
+        type: 'array',
+        of: [{type: 'reference', to: {type: 'product_category'}}],
+        validation: Rule => Rule.required()
+      }),
 
       defineField({
         name: 'prix',

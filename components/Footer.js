@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 function Footer() {
   return (
-    <footer className=' sticky top-[100vh] w-[100%] md:h-[300px] rounded-t-lg bg-green-base flex flex-col items-center justify-center'>
+    <footer className=' sticky top-[100vh] w-[100%] md:h-[300px] bg-green-base flex flex-col items-center justify-center'>
         <div className=' h-[80%] w-[100%] mx-auto flex flex-col-reverse lg:flex-row items-center justify-evenly '>
             
             <div className='md:w-[300px] md:h-[200px]  flex flex-col items-center justify-center my-4 md:my-0 '>

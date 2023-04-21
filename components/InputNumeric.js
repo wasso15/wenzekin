@@ -4,14 +4,13 @@ import { useDispatch } from "react-redux";
 import { MdClose } from 'react-icons/md';
 
 import toast from 'react-hot-toast';
-import Link from "next/link";
 import { CgShoppingCart } from "react-icons/cg";
 
 import { useSelector } from 'react-redux';
 import { selectBasketItems } from '@/redux/features/BaskeSlice';
 import { urlFor } from "@/lib/client";
 
-const InputNumeric = ({data, notify}) => {
+const InputNumeric = ({data}) => {
  const dispatch= useDispatch();
  const basketCount= useSelector(selectBasketItems); 
 
@@ -26,7 +25,7 @@ console.log('input Numerique',data)
       <div
         className={`${
           t.visible ? 'animate-enter' : 'animate-leave'
-        } max-w-md w-full h-[80px] mt-[50px] bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+        } max-w-md w-full  lg:h-[80px] mt-[45px] bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
       >
         <div className="flex-1 w-0 p-4">
           <div className="flex items-start">
@@ -49,7 +48,7 @@ console.log('input Numerique',data)
         </div>
         <div className="flex bg-green-base  rounded-r-lg ">
          
-           <div  className=' lg:w-[80px] flex flex-col gap-[6px]'>
+           <div  className='w-[65px] lg:w-[80px] flex flex-col gap-[6px]'>
             <button
             onClick={() => toast.dismiss(t.id)} className=" p-[2px] flex flex-row justify-end">
             <MdClose className=" text-[16px] text-white"/>
@@ -71,17 +70,17 @@ console.log('input Numerique',data)
   }
  
   return (
-    <div className="h-[85px] w-full shadow-md bg-white rounded-lg  flex flex-row justify-around items-center">
+    <div className="h-[85px] w-full shadow-md bg-white rounded-lg  flex flex-row justify-around items-center px-3">
       <div className="">
-        <p className=" font-bold text-base text-gray-800"> Total 500 Fc </p>
+        <p className=" font-bold text-xs lg:text-base text-gray-800"> Total 500 Fc </p>
         <p className=" text-xs"> 500Fc/Kg </p>
       </div>
-      <div className=" border h-7 w-[130px] rounded-md border-orange-medium flex flex-row justify-around items-center ">
+      <div className=" border h-7 w-[100px] lg:w-[130px] rounded-md border-orange-medium flex flex-row justify-around items-center ">
         <div className="h-full w-6 cursor-pointer flex flex-col items-center justify-center">
           <p className=" text-orange-medium font-semibold">+</p>
         </div>
         <div>
-          <p className=" font-bold text-sm "> 1kg</p>
+          <p className=" font-bold text-xs lg:text-sm "> 1kg</p>
         </div>
         <div className="h-full w-6 cursor-pointer flex flex-col items-center justify-center">
           <p className=" text-orange-medium font-semibold">-</p>

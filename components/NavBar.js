@@ -13,11 +13,11 @@ function NavBar() {
    const basketCount= useSelector(selectBasketItems); 
    console.log()
   return (
-    <nav className=' h-[52px] bg-green-base rounded-b-[15px] flex flex-row items-center'>
+    <nav className='  w-full h-[52px] bg-green-base rounded-b-[15px] flex flex-row items-center'>
        
      <div className='flex flex-row items-center w-[95%] justify-between mx-auto '>
 
-            <div className=' w-[70%] lg:w-[650px] flex-row flex justify-between  items-center'>
+            <div className=' w-[68.5%] lg:w-[650px] flex-row flex justify-between  items-center'>
 
                 <div className=' flex flex-row items-center'>
                     <Link href='/'  className="w-[40px] h-[35px]  md:h-[40px] md:w-[50px] relative "> 
@@ -33,9 +33,9 @@ function NavBar() {
                 </div>
 
                       
-                <Link href='/category'  className=' md:px-4 flex flex-row items-center border-b-[3px] border-transparent hover:border-b-[3px] hover:border-orange-medium h-[52px]'>
+                <Link href='/category'  className=' ml-2 w-[60px] md:px-4 flex flex-row items-center border-b-[3px] border-transparent hover:border-b-[3px] active:border-orange-medium  hover:border-orange-medium h-[52px]'>
                     <div className='text-white text-[12px] hidden lg:block'> Categorie</div>
-                    <div className='ml-3 md:mx-2 h-[20px] w-[20px]  md:h-[21px]  md:w-[21px] relative'>
+                    <div className=' mx-3 md:mx-2 h-[20px] w-[20px]  md:h-[21px]  md:w-[21px] relative'>
                         <Image src={ImagesAssets.categoryIcon} fill={true} object-fit= "contain"  alt='Logo wenzeKin'/>
                     </div>
 
@@ -43,21 +43,24 @@ function NavBar() {
 
             </div>
 
-            <div className=' w-[20%] lg:w-[250px] flex-row flex justify-between lg:justify-around items-center'>
+            <div className=' w-[25%] lg:w-[250px] flex-row flex justify-between lg:justify-around items-center '>
 
-                      
-                <Link href='/auth/login' className='flex flex-row items-center border-b-[3px] border-transparent hover:border-b-[3px] hover:border-orange-medium h-[52px] px-4 '>
+                  
+                <Link 
+                // href='/auth/login' 
+                href={"#"}
+                className='flex flex-row items-center border-b-[3px] border-transparent hover:border-b-[3px] hover:border-orange-medium h-[52px] px-4 '>
                     
-                        <FiUser color='white' className=' text-[22px] md:text-[26x] ' />
+                        <FiUser color='white' className=' text-[18px] md:text-[26x] ' />
                     <div className='text-white ml-2 text-[12px] hidden md:block'> Login </div>
 
-                </Link>
+                </Link> 
 
-               <Link href='/checkout'  className=' lg:w-[120px] flex flex-row items-center justify-center border-b-[3px] border-transparent hover:border-b-[3px] hover:border-orange-medium h-[52px] '>
+               <Link href='/checkout'  className='w-full lg:w-[120px] mr-1 flex flex-row items-center justify-center border-b-[3px] border-transparent hover:border-b-[3px] hover:border-orange-medium h-[52px] '>
                <div className='flex flex-row  relative h-7 items-center '>                  
                     
-                    <CgShoppingCart color='white' className="text-[24px] md:text-[24px]"/>
-                    <div className=' absolute -top-[5px] right-[42px] text-[10px] mr-1 md:mr-0 h-4 w-4 md:h-[18px] md:w-[18px] rounded-full bg-orange-medium flex flex-row items-center justify-center  text-white'>{basketCount.length}</div>
+                    <CgShoppingCart color='white' className="text-[18px] md:text-[24px]"/>
+                    <div className=' absolute  top-0  left-[14px] lg:-top-[5px] lg:right-[42px] text-[8px] md:text-[10px] mr-1 md:mr-0 h-4 w-4 md:h-[18px] md:w-[18px] rounded-full bg-orange-medium flex flex-row items-center justify-center  text-white'>{basketCount.length}</div> 
                     <div className='text-white ml-2 text-[12px] mr-2 hidden lg:block'> Panier </div>
                 </div>
                               

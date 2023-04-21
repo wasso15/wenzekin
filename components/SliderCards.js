@@ -6,7 +6,7 @@ import Product from './Product';
 const SliderCards = ({productData, children}) => {
   return (
     <div className='flex flex-row items-center w-full'>
-          <div className=" h-8 w-8 rounded  bg-green-base hover:bg-green-base/90 flex flex-row items-center justify-center">
+          <div className=" hidden lg:flex  h-8 w-8 rounded  bg-green-base hover:bg-green-base/90 flex-row items-center justify-center">
             <MdArrowBackIosNew className=" text-white text-base" />
           </div>
           <div className=" w-[90%]  mx-auto py-5">
@@ -19,7 +19,7 @@ const SliderCards = ({productData, children}) => {
               </div>
             </div>
           </div>
-          <div className=" h-8 w-8 rounded  bg-green-base hover:bg-green-base/90 flex flex-row items-center justify-center">
+          <div className="hidden lg:flex h-8 w-8 rounded  bg-green-base hover:bg-green-base/90  flex-row items-center justify-center">
             <MdArrowForwardIos className=" text-white text-base" />
           </div>
         </div>

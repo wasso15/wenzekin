@@ -13,17 +13,18 @@ const ProductDetails = ({ productData, products }) => {
   const productImg = urlFor(image).url();
   return (
     <div className=" flex flex-col gap-[60px]">
-      <div className=" w-[80%] items-center justify-center   mx-auto  flex flex-row gap-x-6 ">
-        <div className=" w-[45%]   ">
+      <div className=" w-[90%] lg:w-[80%] items-center justify-center   mx-auto  flex flex-col lg:flex-row gap-x-6 ">
+        <div className="w-full  lg:w-[45%]   ">
           <img
-            className="w-full h-[450px] rounded-xl object-cover object-center"
+            className="w-full h-[250px] lg:h-[450px] rounded-xl object-cover object-center"
             src={productImg}
             alt="Mountain"
           />
         </div>
-        <div className=" w-[45%] ">
+
+        <div className=" w-full  lg:w-[45%] mt-[45px]  lg:mt-[45px] ">
           <div className="border-b-[2px] border-orange-medium">
-            <p className=" text-gray-700 font-bold text-[28px]">{Nom}</p>
+            <p className=" text-gray-700 font-bold text-[28px] text-center lg:text-left">{Nom}</p>
           </div>
           <div className="w-[90%] mx-auto mt-3">
             <div className=" flex flex-row justify-between">
@@ -46,11 +47,11 @@ const ProductDetails = ({ productData, products }) => {
             <div className=" flex flex-row justify-between mt-1">
               <p className=" text-orange-medium  text-xs">En stock </p>
             </div>
-            <div className=" flex flex-row justify-between mt-10  h-[200px]">
+            <div className=" flex flex-row justify-between mt-10  ">
               <p className=" text-silver text-justify text-sm">{description}</p>
             </div>
 
-            <div className=" flex flex-row justify-between mt-[30px] ">
+            <div className=" flex flex-row justify-between mt-[30px]  ">
               <InputNumeric notify={notify} data={productData} />
             </div>
           </div>
