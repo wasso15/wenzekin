@@ -3,20 +3,23 @@ import { urlFor } from "@/lib/client";
 import Link from "next/link";
 
 function Product({ data }) {
-  // console.log("data product", data);
-  const { image, Nom,prix,slug,_id } = data;
+
+  const { image, Nom,prix,slug,_id} = data;
+  console.log(slug.current)
+
   const productImg = urlFor(image).url();
   return (
-    <Link key={_id} href={`/product/${slug.current}`} className="max-w-sm overflow-hidden  shadow-lg h-[290px] transform transition duration-200 hover:scale-105 hover:rotate" >
+    <Link key={_id} href={`/product/${slug.current}`} className="max-w-sm  rounded-t-xl overflow-hidden  shadow h-[210px]  md:h-[290px] transform transition duration-200 hover:scale-105 hover:rotate" >
       <img
-        className="w-full h-[180px] rounded-t-xl object-cover"
+        className="w-full h-[140px] md:h-[180px] rounded-t-xl object-cover"
         src={productImg}
         alt="Mountain"
       />
 
-      <div className="h-[110px]  relative -top-3 rounded-xl bg-white px-4">
-        <div className="w-full">
-          <p className=" text-silver  font-bold text-base pt-3">{Nom}</p>
+
+      <div className="h-[110px]  relative -top-3 rounded-xl bg-white px-[10px] md:px-4">
+        <div className="w-full mt-2 ">
+          <p className=" text-silver  font-bold text-sm pt-2">{Nom}</p>
 
           <div className=" flex flex-row justify-between">
             <p className=" text-silver  text-xs">Vivre Frais </p>
@@ -35,10 +38,10 @@ function Product({ data }) {
               <p className=" font-bold text-orange-medium  text-xs">1/5</p>
             </div>
           </div>
-          <div className="mt-3 flex flex-row items-center justify-between"> 
+          <div className=" mt-[6px] md:mt-3 flex flex-row items-center justify-between"> 
             <p className=" text-xs font-bold text-orange-medium">{prix}Fc/Kg</p>
 
-            <div  className=" h-[35px] w-[100px] bg-green-base rounded hover:bg-green-base/90  cursor-pointer  flex flex-row items-center justify-center">
+            <div  className=" hidden  h-[35px] w-[100px] bg-green-base rounded hover:bg-green-base/90  cursor-pointer  md:flex flex-row items-center justify-center">
                 <p className=" text-xs font-bold text-white">Voir</p>
             </div>
           </div>

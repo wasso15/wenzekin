@@ -18,8 +18,8 @@ function HowItWorks() {
     },
   ];
   return (
-    <div className=" w-full bg-orange-medium ">
-      <div className=" w-[90%] mx-auto lg:h-[300px] mt-[150px] bg-orange-medium py-6 md:py-0 flex flex-row lg:flex-col items-center justify-center">
+    <div className="w-full bg-orange-medium  ">
+      <div className="  w-[90%] mx-auto lg:h-[300px] my-8  bg-orange-medium md:py-0 flex flex-row lg:flex-col items-center justify-center">
         <div className=" h-[80%] w-[90%] flex-col flex justify-center ">
           <p className=" text-white font-bold text-center lg:text-left mb-6"> Comment ça marche</p>
           <div className=" flex flex-col lg:flex-row justify-between h-[60%] items-center space-y-8 lg:space-y-0 mt-2">

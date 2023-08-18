@@ -1,24 +1,25 @@
-import { addToBasket } from "@/redux/features/BaskeSlice";
+// import { addToBasket } from "@/redux/features/BaskeSlice";
 import React from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { MdClose } from 'react-icons/md';
 
 import toast from 'react-hot-toast';
 import { CgShoppingCart } from "react-icons/cg";
 
-import { useSelector } from 'react-redux';
-import { selectBasketItems } from '@/redux/features/BaskeSlice';
+// import { useSelector } from 'react-redux';
 import { urlFor } from "@/lib/client";
+// import { selectBasketItems } from '@/redux/features/BaskeSlice';
+// import { urlFor } from "@/lib/client";
 
 const InputNumeric = ({data}) => {
- const dispatch= useDispatch();
- const basketCount= useSelector(selectBasketItems); 
+//  const dispatch= useDispatch();
+//  const basketCount= useSelector(selectBasketItems); 
 
  const { image, Nom, prix, slug, _id,description } = data;
  const productImg = urlFor(image).url();
 
  const addProduct=()=>{
-    dispatch(addToBasket(data));
+    // dispatch(addToBasket(data));
     toast.custom((t) => (
       <div
         className={`${
@@ -48,7 +49,8 @@ const InputNumeric = ({data}) => {
          
            <div  className='w-[65px] lg:w-[80px] flex flex-col gap-[6px]'>
             <button
-            onClick={() => toast.dismiss(t.id)} className=" p-[2px] flex flex-row justify-end">
+            // onClick={() => toast.dismiss(t.id)} 
+            className=" p-[2px] flex flex-row justify-end">
             <MdClose className=" text-[16px] text-white"/>
             </button>
             <div className="">
@@ -85,7 +87,9 @@ const InputNumeric = ({data}) => {
         </div>
       </div>
       <div></div>
-      <div onClick={addProduct} className=" border h-[35px] w-[100px] bg-green-base rounded hover:bg-green-base/90  cursor-pointer  flex flex-row items-center justify-center">
+      <div 
+      // onClick={addProduct} 
+         className=" border h-[35px] w-[100px] bg-green-base rounded hover:bg-green-base/90  cursor-pointer  flex flex-row items-center justify-center">
         <p className=" text-xs font-bold text-white">Ajouter</p>
       </div>
     </div>
