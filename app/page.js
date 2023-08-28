@@ -15,8 +15,6 @@ export default async function Home() {
 
   return (
     <>
-      <NavBar />
-
       <main className="flex min-h-screen flex-col items-center justify-between">
         <header>
           <BannerHero data={banner} />

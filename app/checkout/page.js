@@ -223,7 +223,7 @@ const Checkout = () => {
   //       }
 
   return (
-    <div className="w-[95%] md:w-[80%] mx-auto flex flex-col md:flex-row md:gap-[40px] mb-[100px] ">
+    <div className="w-[95%] md:w-[80%] mt-9 mx-auto flex flex-col md:flex-row md:gap-[40px] mb-[100px] ">
       <div className=" w-full md:w-1/2  ">
         <div className=" w-[95%] md:w-[90%] mx-auto">
           <div className="w-full border-b-[3px] mx-auto py-3 border-orange-medium flex flex-row items-center space-x-3">
